@@ -20,12 +20,42 @@ const routes = [
         path: '/',//访问路径 http://127.0.0.1:5173/cx/XfDGdOkjVo7deIxQjurcf8BEnNf 
         name: 'home', //命名路由
         component: Index,   //key:value  默认//页面组件 components 普通组件 页面组件和普通组件是一对多
+        redirect: 'project',
+        children: [
+            {
+                path: '/subjectCategory',
+                name: 'subjectCategory',
+                component: () => import('../views/static/subjectCategory.vue')
+            },
+            {
+                path: '/subject',
+                name: 'subject',
+                component: () => import('../views/static/subject.vue')
+            },
+            {
+                path: '/subjectComment',
+                name: 'subjectComment',
+                component: () => import('../views/static/subjectComment.vue')
+            },
+            {
+                path: '/project',
+                name: 'project',
+                component: () => import('../views/static/project.vue')
+            },
+        ]
     },
     {
         path: '/adcate',
         name: 'adCate',
         component: () => import('../views/static/adCate.vue')// 懒加载
     },
+
+    {
+        path: '/cms-topic',
+        name: 'cms-topic',
+        component: () => import('@/views/admin/cms-topic.vue'), // 懒加载
+    },
+
     {
         path: '/login',
         name: 'login',
@@ -46,6 +76,8 @@ const routes = [
                 name: 'admin-info',
                 component: () => import('@/views/admin/info.vue')
             },
+
+
             {
                 path: 'logout',
                 name: 'admin-logout',
@@ -88,13 +120,13 @@ router.beforeEach((to, from, next) => {
     }
     else {
 
-        if(userStore.token&&userStore.token.length>0){
+        if (userStore.token && userStore.token.length > 0) {
             next()
         }
-        else{
-           next({name:"login"}) 
+        else {
+            next({ name: "login" })
         }
-        
+
     }
 
 

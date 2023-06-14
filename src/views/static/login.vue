@@ -20,8 +20,8 @@
             </div>
 
             <el-form ref="ruleFormRef" :model="userForm" status-icon :rules="rules" class="login-ruleForm">
-                <el-form-item prop="email">
-                    <el-input v-model="userForm.email" autocomplete="off" placeholder="请输入你的用户邮箱" suffix-icon="Message" />
+                <el-form-item prop="username">
+                    <el-input v-model="userForm.username" autocomplete="off" placeholder="请输入你的用户邮箱" suffix-icon="Message" />
                 </el-form-item>
                 <el-form-item prop="password">
                     <el-input v-model="userForm.password" type="password" autocomplete="off" placeholder="请输入你的用户密码"
@@ -52,11 +52,11 @@ export default defineComponent({
         return {
             n: 30,
             userForm: {
-                email: '',
+                username: '',
                 password: ''
             },
             rules: {
-                email: [
+               username: [
                     { required: true, message: '请输入正确的电子邮箱', trigger: 'blur' },
                     { type: 'email', message: "电子邮箱格式错误", trigger: 'blur' }
                 ],
@@ -98,14 +98,9 @@ export default defineComponent({
 
                         // pinia 下次解决
                         // 跳转页面
-
                         if (result.success) {
-                            const userinfo = result.data.userinfo;
-                            console.log(that);
-                            that.setToken(userinfo.token);
-                            that.fillUserinfo(userinfo);
-                            that.$router.push('/');
 
+                            that.$router.push('/');
                         }
                         else {
 
